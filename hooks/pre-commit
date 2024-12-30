@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+SCRIPTS_DIR="$(dirname $0)/scripts"
+"$SCRIPTS_DIR/auto-update.sh"
+"$SCRIPTS_DIR/pre-commit.sh"
