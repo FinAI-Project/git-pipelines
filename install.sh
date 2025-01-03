@@ -57,32 +57,4 @@ chmod a+x $GITOPS_HOME/*.sh
 chmod a+x $GITOPS_HOME/hooks/*
 chmod a+x $GITOPS_HOME/hooks/scripts/*.sh
 
-# Check utilities
-if [ -z "$SKIP_INSTALL_DEPENDENCIES" ]; then
-    DEPEND_MODS=(pylint pytest)
-    INSTALL_MODS=()
-
-    # Disable virtual env
-    # if [ -n "$VIRTUAL_ENV" ]; then
-    #     OLD_PATH=$PATH
-    #     PATH=$(echo $PATH | sed -e "s,$VIRTUAL_ENV/bin:,,g")
-    # fi
-
-    for module_name in "${DEPEND_MODS[@]}"; do
-        if ! python -m $module_name --version >/dev/null 2>&1; then
-            INSTALL_MODS+=("$module_name")
-        fi
-    done
-
-    # Install utilities
-    if [ ${#INSTALL_MODS[@]} -gt 0 ]; then
-        $PYTHON_BIN -m pip install $INSTALL_MODS
-    fi
-
-    # Enable virtual env
-    # if [ -n "$OLD_PATH" ]; then
-    #     PATH=$OLD_PATH
-    # fi
-fi
-
 echo "The installation of Git pipelines has been completed."

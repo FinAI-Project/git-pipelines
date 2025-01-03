@@ -1,0 +1,3 @@
+# Invoking pylint --generate-rcfile will create a sample rcfile with all the options set and explained in comments.
+[MAIN]
+ignore-paths=.venv

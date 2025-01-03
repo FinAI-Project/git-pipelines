@@ -11,10 +11,12 @@ PASSED_TIME=$((CURRENT_TIME - LAST_CHECK_TIME))
 COLDDOWN_TIME=$((60 * 60))
 if [ $PASSED_TIME -gt $COLDDOWN_TIME ]; then
     if curl --head https://github.com >/dev/null 2>&1; then
-        curl -fsSL https://github.com/FinAI-Project/git-pipelines/raw/main/install.sh | bash
-    else
-        echo "No network connection, skipping update."
-        exit
+        curl -fsSL https://github.com/FinAI-Project/git-pipelines/raw/main/install.sh | bash >/dev/null 2>&1
+        echo -n "$CURRENT_TIME" > "$LAST_CHECK_FILE"
+    # else
+    #     YELLOW=$(tput setaf 3)
+    #     RESET=$(tput sgr0)
+    #     >&2 echo "${YELLOW}No network connection, skipping update.${RESET}"
+    #     exit
     fi
 fi
-echo -n "$CURRENT_TIME" > "$LAST_CHECK_FILE"
